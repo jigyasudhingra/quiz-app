@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const quizzes = [
   {
@@ -195,6 +195,8 @@ const App = () => {
   const [selected, setSelected] = useState([]);
   const [selectedOption, setSelectedOption] = useState("");
   const [score, setScore] = useState(0);
+  const [time, setTime] = useState(quiz.duration - 1);
+  const [seconds, setSeconds] = useState(60);
 
   const prevQuestion = () => {
     if (questionIndex > 0) setQuestionIndex(questionIndex - 1);
@@ -227,8 +229,32 @@ const App = () => {
     }
   };
 
+  const myTimer = () => {
+    console.log(time, seconds);
+    if (seconds === 0) {
+      setSeconds(59);
+      setTime(time - 1);
+    } else setSeconds(seconds - 1);
+  };
+
+  useEffect(() => {
+    const interval = setInterval(myTimer, 1000);
+    if (time === 0) clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+    };
+  }, [time, seconds]);
+
   return (
     <div className="App">
+      <div
+        style={{
+          margin: 5,
+          padding: 5,
+        }}
+      >
+        {time}:{seconds}
+      </div>
       <button onClick={() => prevQuestion()} disabled={questionIndex === 0}>
         Prev
       </button>
@@ -253,6 +279,15 @@ const App = () => {
         Next
       </button>
       {getScore()}
+
+      <div
+        style={{
+          margin: 5,
+          padding: 5,
+        }}
+      >
+        <button>Submit </button>
+      </div>
     </div>
   );
 };
