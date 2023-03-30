@@ -194,9 +194,9 @@ const App = () => {
   const [questionIndex, setQuestionIndex] = useState(0);
   const [selected, setSelected] = useState([]);
   const [selectedOption, setSelectedOption] = useState("");
-  const [score, setScore] = useState(0);
+  const [isStart, setIsStart] = useState(true);
   const [time, setTime] = useState(quiz.duration - 1);
-  const [seconds, setSeconds] = useState(60);
+  const [seconds, setSeconds] = useState(59);
 
   const prevQuestion = () => {
     if (questionIndex > 0) setQuestionIndex(questionIndex - 1);
@@ -239,11 +239,18 @@ const App = () => {
 
   useEffect(() => {
     const interval = setInterval(myTimer, 1000);
-    if (time === 0) clearInterval(interval);
+    if ((time === 0 && seconds === 0) || isStart === false) {
+      clearInterval(interval);
+    }
+
     return () => {
       clearInterval(interval);
     };
-  }, [time, seconds]);
+  }, [time, seconds, isStart]);
+
+  const submitScore = () => {
+    setIsStart(false);
+  };
 
   return (
     <div className="App">
@@ -278,7 +285,6 @@ const App = () => {
       >
         Next
       </button>
-      {getScore()}
 
       <div
         style={{
@@ -286,7 +292,14 @@ const App = () => {
           padding: 5,
         }}
       >
-        <button>Submit </button>
+        <button onClick={() => submitScore()}>Submit </button>
+        {!isStart && (
+          <div>
+            Time Took: {quiz.duration - time - 1} min {60 - seconds} seconds
+            <br />
+            Marks Scored: {getScore()}
+          </div>
+        )}
       </div>
     </div>
   );
