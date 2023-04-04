@@ -17,25 +17,21 @@ const quizzes = [
             option:
               "1. Lorem Ipsum is simply dummy text of the printing an typesetting industry. Lorem Ipsum has been the industry",
             correct: false,
-            selected: false,
           },
           {
             option:
               "2. Lorem Ipsum is simply dummy text of the printing an typesetting industry. Lorem Ipsum has been the industry",
             correct: true,
-            selected: false,
           },
           {
             option:
               "3. Lorem Ipsum is simply dummy text of the printing an typesetting industry. Lorem Ipsum has been the industry",
             correct: false,
-            selected: false,
           },
           {
             option:
               "4. Lorem Ipsum is simply dummy text of the printing an typesetting industry. Lorem Ipsum has been the industry",
             correct: false,
-            selected: false,
           },
         ],
       },
@@ -47,25 +43,21 @@ const quizzes = [
             option:
               "1. Lorem Ipsum is simply dummy text of the printing an typesetting industry. Lorem Ipsum has been the industry",
             correct: false,
-            selected: false,
           },
           {
             option:
               "2. Lorem Ipsum is simply dummy text of the printing an typesetting industry. Lorem Ipsum has been the industry",
             correct: true,
-            selected: false,
           },
           {
             option:
               "3. Lorem Ipsum is simply dummy text of the printing an typesetting industry. Lorem Ipsum has been the industry",
             correct: false,
-            selected: false,
           },
           {
             option:
               "4. Lorem Ipsum is simply dummy text of the printing an typesetting industry. Lorem Ipsum has been the industry",
             correct: false,
-            selected: false,
           },
         ],
       },
