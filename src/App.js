@@ -10,7 +10,7 @@ const routes = createBrowserRouter([
     element: <Home />,
   },
   {
-    path: "/play",
+    path: "/play/:id",
     element: <QuizPlay />,
   },
   {

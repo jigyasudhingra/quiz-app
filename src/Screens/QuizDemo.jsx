@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { addNewQuiz } from "../fireabse-config";
 
 const demoQuestions = [
   {
@@ -106,10 +107,10 @@ const QuizDemo = () => {
     setQuestions(updatedQuestions);
   };
 
-  const saveQuiz = () => {
+  const saveQuiz = async () => {
     refactorQuiz();
     const finalQuiz = { ...quizDetails, questions: [...questions] };
-    console.log(finalQuiz);
+    await addNewQuiz(finalQuiz);
   };
 
   return (

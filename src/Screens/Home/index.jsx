@@ -1,7 +1,18 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { getAllQuiz } from "../../fireabse-config";
 
 const Home = () => {
+  const [quizes, setQuizes] = useState([]);
+
+  const getQuizes = async () => {
+    setQuizes(await getAllQuiz());
+  };
+
+  useEffect(() => {
+    getQuizes();
+  }, []);
+
   return (
     <div>
       <Link to="/play">

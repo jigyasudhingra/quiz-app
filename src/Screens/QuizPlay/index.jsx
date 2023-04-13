@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import Result from "../Result";
+import { useParams } from "react-router-dom";
+import { getQuizDetails } from "../../fireabse-config";
 
 const quizzes = [
   {
@@ -183,13 +185,25 @@ const quizzes = [
 ];
 
 const QuizPlay = () => {
-  const quiz = quizzes[0];
+  const [quiz, setQuiz] = useState({});
   const [questionIndex, setQuestionIndex] = useState(0);
   const [selected, setSelected] = useState([]);
   const [selectedOption, setSelectedOption] = useState("");
   const [isStart, setIsStart] = useState(true);
   const [time, setTime] = useState(quiz.duration - 1);
   const [seconds, setSeconds] = useState(59);
+
+  const quizParams = useParams();
+
+  const getQuiz = async () => {
+    const temp = await getQuizDetails(quizParams.id);
+    setQuiz(temp);
+    setTime(temp.duration - 1);
+  };
+
+  useEffect(() => {
+    getQuiz();
+  }, []);
 
   const prevQuestion = () => {
     if (questionIndex > 0) setQuestionIndex(questionIndex - 1);
@@ -264,23 +278,24 @@ const QuizPlay = () => {
         <button onClick={() => prevQuestion()} disabled={questionIndex === 0}>
           Prev
         </button>
-        <div>{quiz.questions[questionIndex].statement}</div>
-        {quiz.questions[questionIndex].options.map((i, idx) => (
+        <div>{quiz?.questions?.[questionIndex]?.statement}</div>
+        {quiz?.questions?.[questionIndex]?.options?.map((i, idx) => (
           <div
-            key={i.option}
+            key={i.optionStatement}
             style={{
               margin: 5,
               padding: 5,
-              border: selected[questionIndex] === i ? "1px solid red" : "none",
+              border:
+                selected?.[questionIndex] === i ? "1px solid red" : "none",
             }}
             onClick={() => updateScore(i, idx)}
           >
-            {i.option}
+            {i.optionStatement}
           </div>
         ))}
         <button
           onClick={() => nextQuestion()}
-          disabled={questionIndex === quiz.questions.length - 1}
+          disabled={questionIndex === quiz?.questions?.length - 1}
         >
           Next
         </button>
