@@ -96,6 +96,16 @@ const QuizDemo = () => {
     }
   };
 
+  const deleteOption = (questionIndex, optionIndex) => {
+    const updatedQuestionOptions = [
+      ...questions[questionIndex].options.slice(0, optionIndex),
+      ...questions[questionIndex].options.slice(optionIndex + 1),
+    ];
+    let updatedQuestions = [...questions];
+    updatedQuestions[questionIndex].options = [...updatedQuestionOptions];
+    setQuestions(updatedQuestions);
+  };
+
   const saveQuiz = () => {
     refactorQuiz();
     const finalQuiz = { ...quizDetails, questions: [...questions] };
@@ -180,6 +190,14 @@ const QuizDemo = () => {
                 <span onClick={() => makeCorrectHandler(index, idx)}>
                   make it
                   {!option.correct ? " correct" : " incorrect"}
+                </span>
+                <span
+                  style={{
+                    fontSize: 25,
+                  }}
+                  onClick={() => deleteOption(index, idx)}
+                >
+                  ␡
                 </span>
               </div>
             ))}
