@@ -265,49 +265,112 @@ const QuizPlay = () => {
     <div>
       <div
         style={{
+          textAlign: "center",
           display: isStart ? "block" : "none",
         }}
       >
         <div
           style={{
-            margin: 5,
-            padding: 5,
+            margin: "2% 45%",
+            padding: 10,
+            borderRadius: 20,
+            backgroundColor: "#e7ddfe",
           }}
         >
-          {time}:{seconds}
+          {time}:{seconds} left
         </div>
-        <button onClick={() => prevQuestion()} disabled={questionIndex === 0}>
-          Prev
-        </button>
-        <div>{quiz?.questions?.[questionIndex]?.statement}</div>
-        {quiz?.questions?.[questionIndex]?.options?.map((i, idx) => (
-          <div
-            key={i.optionStatement}
-            style={{
-              margin: 5,
-              padding: 5,
-              border:
-                selected?.[questionIndex] === i ? "1px solid red" : "none",
-            }}
-            onClick={() => updateScore(i, idx)}
-          >
-            {i.optionStatement}
-          </div>
-        ))}
-        <button
-          onClick={() => nextQuestion()}
-          disabled={questionIndex === quiz?.questions?.length - 1}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            width: "100%",
+            justifyContent: "center",
+            gap: 100,
+          }}
         >
-          Next
-        </button>
-
+          <button
+            style={{
+              border: "none",
+              textDecoration: "none",
+              background: "none",
+              color: "#7E19AD",
+              cursor: questionIndex === 0 ? "no-drop" : "pointer",
+              fontSize: 50,
+            }}
+            onClick={() => prevQuestion()}
+            disabled={questionIndex === 0}
+          >
+            {"<"}
+          </button>
+          <div
+            style={{
+              textAlign: "left",
+              width: 600,
+            }}
+          >
+            <b>
+              <div>Ques. {questionIndex + 1}</div>
+            </b>
+            <br />
+            <div>{quiz?.questions?.[questionIndex]?.statement}</div>
+            {quiz?.questions?.[questionIndex]?.options?.map((i, idx) => (
+              <div
+                key={i.optionStatement}
+                style={{
+                  margin: 5,
+                  borderRadius: 20,
+                  backgroundColor:
+                    selected?.[questionIndex] !== i ? "#f1defa" : "#e7ddfe",
+                  padding: 15,
+                  marginTop: 15,
+                }}
+                onClick={() => updateScore(i, idx)}
+              >
+                {i.optionStatement}
+              </div>
+            ))}
+          </div>
+          <button
+            style={{
+              border: "none",
+              textDecoration: "none",
+              background: "none",
+              color: "#7E19AD",
+              fontSize: 50,
+              cursor:
+                questionIndex === quiz?.questions?.length - 1
+                  ? "no-drop"
+                  : "pointer",
+            }}
+            onClick={() => nextQuestion()}
+            disabled={questionIndex === quiz?.questions?.length - 1}
+          >
+            {">"}
+          </button>
+        </div>
         <div
           style={{
             margin: 5,
             padding: 5,
           }}
         >
-          <button onClick={() => submitScore()}>Submit </button>
+          <button
+            style={{
+              border: "none",
+              textDecoration: "none",
+              background: "#7E19AD",
+              color: "white",
+              borderRadius: 20,
+              padding: 10,
+              paddingLeft: 20,
+              paddingRight: 20,
+              fontSize: 10,
+              marginTop: 30,
+            }}
+            onClick={() => submitScore()}
+          >
+            SUBMIT QUIZ{" "}
+          </button>
         </div>
       </div>
       {!isStart && (
