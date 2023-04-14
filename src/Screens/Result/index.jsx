@@ -7,6 +7,7 @@ const Result = ({ quiz, minute, seconds, result }) => {
         style={{
           fontFamily: "Garet Heavy",
           fontSize: 16,
+          textAlign: "center",
         }}
       >
         RESULT

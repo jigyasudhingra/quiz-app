@@ -188,7 +188,7 @@ const QuizPlay = () => {
   const [quiz, setQuiz] = useState({});
   const [questionIndex, setQuestionIndex] = useState(0);
   const [selected, setSelected] = useState([]);
-  // const [selectedOption, setSelectedOption] = useState("");
+  const [selectedOption, setSelectedOption] = useState("");
   const [isStart, setIsStart] = useState(true);
   const [time, setTime] = useState(quiz.duration - 1);
   const [seconds, setSeconds] = useState(59);
@@ -224,7 +224,7 @@ const QuizPlay = () => {
   };
 
   const updateScore = (option) => {
-    // setSelectedOption(option);
+    setSelectedOption(option);
     if (
       selected[selected.length - 1] !== option &&
       selected.length === questionIndex
