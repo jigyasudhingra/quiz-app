@@ -1,10 +1,14 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-import { collection, addDoc, getDocs, doc, getDoc } from "firebase/firestore";
-
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getFirestore, setDoc } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  doc,
+  getDoc,
+  deleteDoc,
+} from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -20,17 +24,26 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 // Add quiz into firebase
+const quizTableName = "quizes";
 export const addNewQuiz = async (quiz) => {
-  await addDoc(collection(db, "quizes"), quiz);
+  await addDoc(collection(db, quizTableName), quiz);
 };
 
 export const getAllQuiz = async () => {
-  const allEntries = await getDocs(collection(db, "quizes"));
+  const allEntries = await getDocs(collection(db, quizTableName));
   return allEntries.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
 };
 
 export const getQuizDetails = async (quizId) => {
-  const temp = await getDoc(doc(db, "quizes", quizId));
+  const temp = await getDoc(doc(db, quizTableName, quizId));
   const quiz = await temp.data();
   return quiz;
+};
+
+export const editQuizDetails = async (quizId, quiz) => {
+  await setDoc(doc(db, quizTableName, quizId), quiz);
+};
+
+export const deleteQuizDetails = async (quizId) => {
+  await deleteDoc(doc(db, "quizes", quizId));
 };

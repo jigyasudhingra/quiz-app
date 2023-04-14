@@ -1,33 +1,37 @@
-import React, { useState } from "react";
-import { addNewQuiz } from "../fireabse-config";
-
-const demoQuestions = [
-  {
-    statement: "refg wergertgte wettgetg rtwgrtg",
-    options: [
-      {
-        optionStatement: "gtregrt",
-        correct: false,
-      },
-      {
-        optionStatement: "fregt",
-        correct: true,
-      },
-      {
-        optionStatement: "fsbhhh",
-        correct: false,
-      },
-    ],
-  },
-];
+import React, { useEffect, useState } from "react";
+import {
+  addNewQuiz,
+  deleteQuizDetails,
+  editQuizDetails,
+  getQuizDetails,
+} from "../fireabse-config";
+import { useParams } from "react-router-dom";
 
 const QuizDemo = () => {
-  const [questions, setQuestions] = useState(demoQuestions);
+  const [questions, setQuestions] = useState([]);
   const [quizDetails, setQuizDetails] = useState({
     name: "",
     description: "",
     duration: "",
   });
+
+  const quizId = useParams().id;
+  const getQuiz = async () => {
+    const quiz = await getQuizDetails(quizId);
+    setQuizDetails({
+      name: quiz.name,
+      description: quiz.description,
+      duration: quiz.duration,
+    });
+    setQuestions(quiz.questions);
+  };
+
+  useEffect(() => {
+    if (quizId !== undefined) {
+      getQuiz();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const updateQuestionStatement = (e, index) => {
     const updatedQuestions = [...questions];
@@ -110,7 +114,24 @@ const QuizDemo = () => {
   const saveQuiz = async () => {
     refactorQuiz();
     const finalQuiz = { ...quizDetails, questions: [...questions] };
-    await addNewQuiz(finalQuiz);
+    if (quizId !== undefined) {
+      await editQuizDetails(quizId, finalQuiz);
+      alert("Quiz details updated");
+      window.location.href = "/";
+    } else {
+      await addNewQuiz(finalQuiz);
+      setQuizDetails({
+        name: "",
+        description: "",
+        duration: "",
+      });
+      setQuestions([]);
+    }
+  };
+
+  const deleteQuiz = async () => {
+    await deleteQuizDetails(quizId);
+    window.location.href = "/";
   };
 
   return (
@@ -208,7 +229,9 @@ const QuizDemo = () => {
       ))}
       <button onClick={() => addNewQuestion()}>Add new question</button>
       <button onClick={() => saveQuiz()}>Save quiz</button>
-      <button onClick={() => {}}>Delete quiz</button>
+      {quizId !== undefined && (
+        <button onClick={() => deleteQuiz()}>Delete quiz</button>
+      )}
     </div>
   );
 };
