@@ -184,44 +184,52 @@ const QuizDemo = () => {
           />
           <span
             style={{
-              fontSize: 25,
+              fontSize: 8,
+              letterSpacing: 0.4,
+              color: "red",
             }}
             onClick={() => deleteQuestion(index)}
           >
-            ␡
+            DEL
           </span>
           <div>
             {question?.options?.map((option, idx) => (
-              <div
-                key={index + idx + option}
-                style={{
-                  marginLeft: 20,
-                }}
-              >
-                <input
+              <>
+                <div
+                  key={index + idx + option}
                   style={{
-                    margin: 5,
-                    padding: 5,
-                    border: option.correct
-                      ? "1px solid red"
-                      : "1px solid black",
+                    marginLeft: 20,
                   }}
-                  value={option.optionStatement}
-                  onChange={(e) => updateQuestionOption(e, index, idx)}
-                />
-                <span onClick={() => makeCorrectHandler(index, idx)}>
-                  make it
-                  {!option.correct ? " correct" : " incorrect"}
-                </span>
-                <span
-                  style={{
-                    fontSize: 25,
-                  }}
-                  onClick={() => deleteOption(index, idx)}
                 >
-                  ␡
-                </span>
-              </div>
+                  <input
+                    style={{
+                      margin: 5,
+                      padding: 5,
+                      border: option.correct
+                        ? "1px solid red"
+                        : "1px solid black",
+                    }}
+                    value={option.optionStatement}
+                    onChange={(e) => updateQuestionOption(e, index, idx)}
+                  />
+
+                  <span onClick={() => makeCorrectHandler(index, idx)}>
+                    make it
+                    {!option.correct ? " correct" : " incorrect"}
+                  </span>
+                  <span
+                    style={{
+                      fontSize: 8,
+                      letterSpacing: 0.4,
+                      color: "red",
+                      paddingLeft: 7,
+                    }}
+                    onClick={() => deleteOption(index, idx)}
+                  >
+                    DEL
+                  </span>
+                </div>
+              </>
             ))}
           </div>
           <button onClick={() => addNewOption(index)}>Add new option</button>

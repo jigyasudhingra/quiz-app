@@ -262,7 +262,7 @@ const QuizPlay = () => {
   };
 
   return (
-    <div className="App">
+    <div>
       <div
         style={{
           display: isStart ? "block" : "none",

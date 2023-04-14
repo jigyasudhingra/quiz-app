@@ -1,8 +1,40 @@
-body {
+@font-face {
+  font-family: "Garet Heavy";
+  src: local("Garet-Heavy"), url("../Assets/Garet-Heavy.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Garet Book";
+  src: local("Garet-Book"), url("../Assets/Garet-Book.ttf") format("truetype");
+}
+
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+div {
+  color: #36007b;
+  font-family: "Garet Book";
+  font-size: 12px;
+}
+
+button {
+  font-family: "Garet Book";
+  color: #36007b;
+}
+
+.text1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.heading1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }

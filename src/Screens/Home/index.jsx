@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { getAllQuiz } from "../../fireabse-config";
+import "../../index.css";
 
 const Home = () => {
   const [quizes, setQuizes] = useState([]);
@@ -18,55 +18,109 @@ const Home = () => {
 
   return (
     <div>
-      <Link to="/play">
-        <button>Play</button>
-      </Link>
-      <Link to="/create">
-        <button>Create New Quiz</button>
-      </Link>
       {loading ? (
         <div>loading...</div>
       ) : (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-          }}
-        >
-          {quizes.map((quiz) => {
-            return (
-              <div
-                key={quiz.id}
-                style={{
-                  border: "1px solid red",
-                  padding: 5,
-                  margin: 5,
-                  cursor: "pointer",
-                }}
-              >
-                <div>{quiz.name}</div>
-                <div>{quiz.duration}</div>
-                <div>{quiz.description}</div>
-                <div>{quiz?.questions.length} Questions</div>
-                <div>
-                  <button
-                    onClick={() => {
-                      window.location.href = "/play/" + quiz.id;
+        <div>
+          <div
+            style={{
+              textAlign: "center",
+              fontFamily: "Garet Heavy",
+              fontSize: 16,
+              letterSpacing: 0.4,
+              color: "#752899",
+            }}
+          >
+            QUIZZES
+          </div>
+          <div
+            style={{
+              display: "flex",
+              gap: 30,
+              flexWrap: "wrap",
+              justifyContent: "center",
+              padding: "2% 20%",
+            }}
+          >
+            {quizes.map((quiz) => {
+              return (
+                <div
+                  key={quiz.id}
+                  style={{
+                    backgroundColor: "#ebe6f2",
+                    padding: 25,
+                    borderRadius: 10,
+                    textAlign: "center",
+                    maxWidth: 130,
+                  }}
+                >
+                  <div
+                    className="heading1"
+                    style={{
+                      textTransform: "uppercase",
+                      fontSize: 10,
                     }}
                   >
-                    Play
-                  </button>
-                  <button
-                    onClick={() => {
-                      window.location.href = "/edit/" + quiz.id;
+                    <strong>{quiz.name}</strong>
+                  </div>
+                  <div
+                    style={{
+                      marginTop: 8,
+                      textTransform: "uppercase",
+                      fontSize: 8,
+                      color: "#752899",
                     }}
                   >
-                    Edit
-                  </button>
+                    {quiz?.questions.length} Questions
+                  </div>
+                  <div
+                    className="text1"
+                    style={{
+                      marginTop: 8,
+                      fontSize: 10,
+                    }}
+                  >
+                    {quiz.description}
+                  </div>
+                  <div
+                    style={{
+                      marginTop: 8,
+                    }}
+                  >
+                    <button
+                      style={{
+                        border: "none",
+                        background: "none",
+                        textTransform: "uppercase",
+                        fontSize: 10,
+                        letterSpacing: 0.4,
+                      }}
+                      onClick={() => {
+                        window.location.href = "/play/" + quiz.id;
+                      }}
+                    >
+                      <b>Play</b>
+                    </button>
+                    <span> ⎸ </span>
+                    <button
+                      style={{
+                        border: "none",
+                        background: "none",
+                        textTransform: "uppercase",
+                        fontSize: 10,
+                        letterSpacing: 0.4,
+                      }}
+                      onClick={() => {
+                        window.location.href = "/edit/" + quiz.id;
+                      }}
+                    >
+                      <b>Edit</b>
+                    </button>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       )}
     </div>

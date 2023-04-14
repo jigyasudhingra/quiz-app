@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./Screens/Home";
 import QuizPlay from "./Screens/QuizPlay";
 import QuizDemo from "./Screens/QuizDemo";
+import Navbar from "./Navbar";
 
 const routes = createBrowserRouter([
   {
@@ -25,6 +26,7 @@ const routes = createBrowserRouter([
 const App = () => {
   return (
     <div>
+      <Navbar />
       <RouterProvider router={routes} />
     </div>
   );
