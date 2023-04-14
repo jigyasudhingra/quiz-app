@@ -37,10 +37,14 @@ const Navbar = () => {
               window.location.href = "/";
             }}
           >
-            Home
+            <b>Home</b>
           </p>
-          <p>Contact Us</p>
-          <p>About Us</p>
+          <p>
+            <b>About</b>
+          </p>
+          <p>
+            <b>Contact</b>
+          </p>
         </div>
       </div>
       <div
@@ -62,7 +66,7 @@ const Navbar = () => {
             window.location.href = "/create";
           }}
         >
-          Create new quiz
+          <b>Create new quiz</b>
         </div>
       </div>
     </div>
